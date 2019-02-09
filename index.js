@@ -1,13 +1,13 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-var prefix = "b!"
+var prefix = "#"
 
 
 
 //bc
 
 client.on("message", message => {
-    if (message.content.startsWith("b!obc")) {
+    if (message.content.startsWith("#obc")) {
                  if (!message.member.hasPermission("ADMINISTRATOR"))  return;
   let args = message.content.split(" ").slice(1);
   var argresult = args.join(' ');
@@ -23,7 +23,7 @@ client.on("message", message => {
 //bc online
 
 
-  var prefix = "b!";
+  var prefix = "#";
 
   client.on("message", message => {
   
@@ -44,12 +44,6 @@ client.on("message", message => {
 
 
 
-client.on('message', message => {
-    var  user = message.mentions.users.first() || message.author;
-if (message.content.startsWith("b!avatar")) {
-message.channel.send(`This avatar For ${user} link : ${user.avatarURL}`);
-}
-});
 
 
 client.on('ready',  () => {
@@ -62,106 +56,28 @@ client.on('ready',  () => {
 
 
 
+ 
 
-  client.on('message', message => {
-    if(!message.channel.guild) return;
-let args = message.content.split(' ').slice(1).join(' ');
-if (message.content.startsWith('b!adminbc')){
-if(!message.author.id === '476185102922285066') return;
-message.channel.sendMessage('جار ارسال الرسالة |:white_check_mark:')
-client.users.forEach(m =>{
-m.sendMessage(args)
-})
-}
+client.on('ready', function(){    
+    var ms = 40000 ;    
+    var setGame = ['AĆE Server','#bc','#obc'];    
+    var i = -1;    
+    var j = 0;    
+    setInterval(function (){    
+        if( i == -1 ){    
+j = 1;    
+       }    
+        if( i == (setGame.length)-1 ){    
+            j = -1;    
+      }    
+       i = i+j;    
+        client.user.setGame(setGame[i],`http://www.youtube.com`);    
+}, ms);    
+    
 });
 
 
 
-  
-  client.on('message', msg => {
-    if(msg.content === 'b!help')
-    msg.reply('Check Your DM :white_check_mark:')
-  });
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  client.on("message", message => {
-    if (message.content === "b!help") {
-     const embed = new Discord.RichEmbed() 
-         .setColor("#00FF00")
-         .setThumbnail(message.author.avatarURL)
-         .setDescription(`**Help|هيلب
 
-       b!obc | لأرسال برود كاست للكل
-
-       b!bc  |  لأرسال برود كاست للأونلاين
-
-       b!invite | لدعوة البوت الي سيرفرك
-
-       b!support | سيرفر السبورت** `)
-   message.author.sendEmbed(embed)
-   
-   }
-   });
-
-
-   client.on("message", message => {
-    if (message.content === "b!invite") {
-     const embed = new Discord.RichEmbed()
-         .setColor("RANDOM")
-         .addField('Broadcast', `https://discordapp.com/api/oauth2/authorize?client_id=489960386339274771&permissions=8&scope=bot`)
-     message.author.send({embed});
-   
-    }
-   });
-
-
-   client.on("message", message => {
-    if (message.content === "b!support") {
-     const embed = new Discord.RichEmbed()
-         .setColor("RANDOM")
-         .addField('❤سيرفر الدعم الفني', `  https://discord.gg/NuQ2zYu  `)
-     message.author.send({embed});
-   
-    }
-   });
-
-
-
-
-
-   client.on('message', message => {
-    if (message.content.startsWith("b!bot")) {
-    message.channel.send({
-        embed: new Discord.RichEmbed()
-            .setAuthor(client.user.username,client.user.avatarURL)
-            .setThumbnail(client.user.avatarURL)
-            .setColor('RANDOM')
-            .setTitle('``INFO Broadcast Bot`` ')
-            .addField('``My Ping``' , [`${Date.now() - message.createdTimestamp}` + 'MS'], true)
-            .addField('``RAM Usage``', `[${(process.memoryUsage().rss / 1048576).toFixed()}MB]`, true)
-            .addField('``servers``', [client.guilds.size], true)
-            .addField('``channels``' , `[ ${client.channels.size} ]` , true)
-            .addField('``Users``' ,`[ ${client.users.size} ]` , true)
-            .addField('``My Name``' , `[ ${client.user.tag} ]` , true)
-            .addField('``My ID``' , `[ ${client.user.id} ]` , true)
-                  .addField('``My Prefix``' , `[-]` , true)
-                  .addField('``My Language``' , `[ Java Script ]` , true)
-                    })
-}
-});
-
-client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag} !`);
-          client.user.setActivity("b!help | b!invite",{type: 'WATCHING'});
-  
-  });
 
 client.login(process.env.TOKEN);
